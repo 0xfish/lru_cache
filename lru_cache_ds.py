@@ -25,7 +25,7 @@ class Node:
         self.value = value
         self.prev = None
         self.next = None
-class LRUCache:
+class lru_cache:
     def __init__(self, size: int):
         """
         Initializes the LRU cache data structure.
