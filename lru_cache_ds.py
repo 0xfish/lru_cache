@@ -27,7 +27,7 @@ class Node:
         self.next = None
 class lru_cache:
     """
-    Cache uses a doubly linked list and dictionary to achieve a worst runtime of O(1).
+    Cache uses a doubly linked list and dictionary to achieve an O(1) for get/set methods.
 
     The doubly linkedlist keeps the ordering, while the dictionary gives a random access to the nodes on the linkedlist.
     """

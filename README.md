@@ -8,7 +8,7 @@ from lru_cache_ds import lru_cache
 If storing in a non working directoyr use:
 ```python
 import sys
-sys.path.append('<asbolute_path_to_library>')
+sys.path.append('<absolute_path_to_library>')
 from lru_cache_ds import lru_cache
 
 ```
