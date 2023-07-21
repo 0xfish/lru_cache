@@ -26,12 +26,17 @@ class Node:
         self.prev = None
         self.next = None
 class lru_cache:
-    def __init__(self, size: int):
+    """
+    Cache uses a doubly linked list and dictionary to achieve a worst runtime of O(1).
+
+    The doubly linkedlist keeps the ordering, while the dictionary gives a random access to the nodes on the linkedlist.
+    """
+    def __init__(self, size):
         """
         Initializes the LRU cache data structure.
 
         Args:
-            size: Integer size of cache.
+            size: Positve integer size of cache.
 
         Returns: 
             None
@@ -39,7 +44,8 @@ class lru_cache:
         Raises:
             Assertion for a positive size.
         """
-        assert(size > 0, "ERROR: %s is not a positive integer" % (__str__(size)))
+        assert type(size) == int, "ERROR: %s is not an integer" % (size.__str__)
+        assert size > 0, "ERROR: %s is not a positive integer" % (size.__str__)
         # Make dummy nodes
         self.head = Node(0,0) 
         self.tail = Node(0,0)
@@ -98,7 +104,7 @@ class lru_cache:
         """
         temp = self.head.next
 
-        assert(key in self.data, "ERROR: Key: %s is not in Cache" % (__str__(temp.key)))
+        assert temp.key in self.data, "ERROR: Key: %s is not in Cache" % (temp.key.__str__)
 
         self.__remove(temp)      
         self.data.pop(temp.key)
@@ -116,14 +122,14 @@ class lru_cache:
         Raises:
             Python dictionary key error.
         """
-        assert(key in self.data, "ERROR: Key: %s is not in Cache" % (__str__(key)))
+        assert key in self.data, "ERROR: Key: %s is not in Cache" % (key.__str__)
 
         temp = self.data[key]
         self.__remove(temp)
         self.__insert(temp)
         return temp.value
 
-    def put(self, key: int, value: int) -> None:
+    def put(self, key, value) -> None:
         """
         Insert key value pair into data structure.
 
@@ -137,9 +143,12 @@ class lru_cache:
         Raises:
             Nothing.
         """
+        # Reorder the sequence to reflect update.
         if key in self.data:
-            self.__remove(self.data[key])     
+            self.__remove(self.data[key])
+        # Insert into dictionary and linkedlist.     
         self.data[key] = Node(key, value)
         self.__insert(self.data[key])
+        # If reached limit, evict a line from cache.
         if len(self.data) > self.size:
             self.__evict()
