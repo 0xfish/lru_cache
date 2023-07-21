@@ -108,7 +108,21 @@ class lru_cache:
 
         self.__remove(temp)      
         self.data.pop(temp.key)
+    def contains(self, key) -> bool:
+        """
+        Returns a boolean on whether key is in cache.
 
+        Args:
+            key: Any python object.
+
+        Returns: 
+            Bool 
+
+        Raises:
+            Nothing
+        """
+        return True if key in self.data else False
+    
     def get(self, key):
         """
         Return value from key.

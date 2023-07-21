@@ -11,6 +11,16 @@ class TestStringMethods(unittest.TestCase):
         self.assertRaises(AssertionError, lru_cache, -1)
     def test_non_integer(self):
         self.assertRaises(AssertionError, lru_cache, 10.5)
+    def test_contains_integer(self):
+        DUT = lru_cache(1)
+        DUT.put(1,1)
+        self.assertEqual(DUT.contains(1), True)
+        self.assertEqual(DUT.contains(2), False)
+    def test_contains_string(self):
+        DUT = lru_cache(1)
+        DUT.put("1","1")
+        self.assertEqual(DUT.contains("1"), True)
+        self.assertEqual(DUT.contains("2"), False)
     def test_simple_integer(self):
         DUT = lru_cache(1)
         DUT.put(1,1)
